@@ -3,6 +3,7 @@
 % Specifica delle azioni mediante precondizioni ed effetti alla STRIPS
 % Gli stati sono rappresentati con insiemi ordinati
 
+:- use_module(library(ordsets)).
 
 applicabile(pickup(X),S):-
 	block(X),
