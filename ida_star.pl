@@ -1,5 +1,5 @@
 :- use_module(library(ordsets)).
-:- ["blocchiord12.pl"].
+:- ["azioni.pl", "dominio.pl"].
 
 block(a).
 block(b).
@@ -7,10 +7,10 @@ block(c).
 
 costo(_,1).
 
-iniziale(S):- 
+iniziale(S):-
     list_to_ord_set([ontable(a), ontable(b), on(c,b), clear(a),clear(c),handempty], S).
-    % crea  un insieme togliendo i doppioni 
-    
+    % crea  un insieme togliendo i doppioni
+
 goal(G):- list_to_ord_set([on(c,a),ontable(a),ontable(b),clear(b), handempty],G).
 
 finale(S):- goal(G), ord_subset(G,S).
@@ -21,7 +21,7 @@ heuristic(_,1).
 depth_limit_search(Soluzione,Soglia):-
     iniziale(S),
     dfs_aux(S,Soluzione,[S],Soglia,0).
-    
+
 dfs_aux(S,[],_,_):-finale(S).
 
 dfs_aux(S,[Azione|AzioniTail],Visitati,Soglia,Costo_attuale):-
@@ -34,10 +34,3 @@ dfs_aux(S,[Azione|AzioniTail],Visitati,Soglia,Costo_attuale):-
     Costo_successivo is Costo_attuale + Costo_azione,
     NuovaSoglia is Costo_stimato + Costo_successivo,
     dfs_aux(SNuovo,AzioniTail,[SNuovo|Visitati],NuovaSoglia,Costo_successivo).
-
-
-
-
-
-
-    
