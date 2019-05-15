@@ -1,7 +1,10 @@
 :- use_module(library(ordsets)).
 :- ["azioni.pl", "dominio.pl"].
 
-euristica(_, 1).
+euristica(StatoAttuale, Valore) :-
+    goal(StatoFinale),
+    ord_subtract(StatoAttuale, StatoFinale, DifferenzaStati),
+    length(DifferenzaStati, Valore).
 
 ida_star(Soluzione) :-
     iniziale(S),
