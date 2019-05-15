@@ -1,13 +1,27 @@
 block(a).
 block(b).
 block(c).
-
-iniziale(S):-
-    list_to_ord_set([ontable(a), ontable(b), on(c,b), clear(a),clear(c),handempty], S).
-    % crea  un insieme togliendo i doppioni
-
-goal(G):- list_to_ord_set([on(c,a),ontable(a),ontable(b),clear(b), handempty],G).
+block(d).
+block(e).
 
 costo(_, 1).
 
-finale(S):- goal(G), ord_subset(G,S).
+iniziale(S) :-
+    list_to_ord_set(
+                    [ on(a, b),
+                      on(b, c),
+                      ontable(c),
+                      clear(a),
+                      on(d, e),
+                      ontable(e),
+                      clear(d),
+                      handempty
+                    ],
+                    S).
+
+goal(G) :-
+    list_to_ord_set([on(a, b), on(b, c), on(c, d), ontable(d), ontable(e)], G).
+
+finale(S) :-
+    goal(G),
+    ord_subset(G, S).
