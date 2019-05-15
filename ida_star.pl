@@ -8,14 +8,14 @@ ida_star(Soluzione) :-
     heuristic(S,SogliaMassima),
     ida_star_aux(S,SogliaMassima,Soluzione).
 
-ida_star_aux(S, SogliaMassima, Soluzione) :- 
-    findall 
+ida_star_aux(S, SogliaMassima,Soluzione) :-
     dfs_aux(S, Soluzione, [S], 0, SogliaMassima).
 
-ida_star_aux(S) :- 
-
-    dfs_aux(S, Soluzione, [S], 0, SogliaMassima).
-
+ida_star_aux(S, _, Soluzione) :- 
+    findall(X,euristica_nuova_soglia(X),ListaEuristiche),
+    min_list(ListaEuristiche,Minimmo),
+    retract(euristica_nuova_soglia(EuristicaNuovaSoglia)),
+    ida_star_aux(S,Minimmo,Soluzione).
 
 dfs_aux(S, [], _, _, _) :-
     finale(S).
