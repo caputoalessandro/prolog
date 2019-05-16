@@ -3,8 +3,15 @@
 
 euristica(StatoAttuale, Valore) :-
     goal(StatoFinale),
-    ord_subtract(StatoAttuale, StatoFinale, DifferenzaStati),
-    length(DifferenzaStati, Valore).
+    ord_subtract(StatoFinale, StatoAttuale, DifferenzaStati),    
+    
+    findall(X,findon(DifferenzaStati,0),ListaOn),
+    
+    length(ListaOn, Valore).
+
+findon([],Risultato) :-
+    ord_memberchk(on(X,Y),DifferenzaStati).
+    
 
 ida_star(Soluzione) :-
     iniziale(S),
