@@ -19,31 +19,31 @@ ida_star(Soluzione) :-
     ida_star_aux(S, SogliaMassima, Soluzione).
 
 ida_star_aux(S, SogliaMassima, Soluzione) :-
-    dfs_aux(S, Soluzione, [S], 0, SogliaMassima).
+    dfs_aux(S, Soluzione, [S], SogliaMassima).
 
-ida_star_aux(S, _, Soluzione) :-
-    findall(X, euristica_nuova_soglia(X), ListaEuristiche),
-    min_list(ListaEuristiche, Minimmo),
-    retractall(euristica_nuova_soglia(_)),
-    ida_star_aux(S, Minimmo, Soluzione).
+ida_star_aux(S, SogliaMassimaAttuale, Soluzione) :-
+    findall(X, euristica_da_max_profondita(X), ListaEuristiche),
+    min_list(ListaEuristiche, MinimoEuristiche),
+    retractall(euristica_da_max_profondita(_)),
+    NuovaSogliaMassima is SogliaMassimaAttuale+MinimoEuristiche,
+    ida_star_aux(S, NuovaSogliaMassima, Soluzione).
 
-dfs_aux(S, [], _, _, _) :-
+dfs_aux(S, [], _, _) :-
     finale(S).
 
-dfs_aux(S, [Azione|AzioniTail], Visitati, SogliaAttuale, SogliaMassima) :-
-    SogliaAttuale=<SogliaMassima,
+dfs_aux(S, [Azione|AzioniTail], Visitati, Soglia) :-
+    Soglia>0,
     !,
     applicabile(Azione, S),
     trasforma(Azione, S, SNuovo),
     \+ member(SNuovo, Visitati),
-    NuovaSoglia is SogliaAttuale+1,
-    dfs_aux(SNuovo, AzioniTail, [SNuovo|Visitati], NuovaSoglia, SogliaMassima).
+    NuovaSoglia is Soglia-1,
+    dfs_aux(SNuovo, AzioniTail, [SNuovo|Visitati], NuovaSoglia).
 
 
-dfs_aux(S, _, _, SogliaAttuale, _) :-
-    euristica(S, EuristicaDaStatoCorrente),
-    EuristicaNuovaSoglia is EuristicaDaStatoCorrente+SogliaAttuale,
-    assert(euristica_nuova_soglia(EuristicaNuovaSoglia)),
+dfs_aux(S, _, _, _) :-
+    euristica(S, EuristicaDaMaxProfondita),
+    assert(euristica_da_max_profondita(EuristicaDaMaxProfondita)),
     false.
 
 % ida_star_aux(S, [Azione|AzioniTail], Visitati, CostoAttuale) :-
