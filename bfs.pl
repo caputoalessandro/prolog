@@ -14,9 +14,9 @@ bfs_aux([nodo(S, Azioni)|_], _, Azioni) :-
 bfs_aux([nodo(S, Azioni)|Tail], Visitati, Soluzione) :-
     findall(Azione, applicabile(Azione, S), ListaApplicabili),
     genera_figli(nodo(S, Azioni),
-                ListaApplicabili,
-                [S|Visitati],
-                ListaFigli),
+                 ListaApplicabili,
+                 [S|Visitati],
+                 ListaFigli),
     append(Tail, ListaFigli, NuovaCoda),
     bfs_aux(NuovaCoda, [S|Visitati], Soluzione).
 
