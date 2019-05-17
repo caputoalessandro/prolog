@@ -3,13 +3,15 @@
 :- ["azioni.pl", "dominio.pl"].
 
 identity(X, X).
-is_on(X) :- identity(X, on(_, _)).
+is_on(X) :-
+    identity(X, on(_, _)).
 
 euristica(StatoAttuale, Valore) :-
     goal(StatoFinale),
-    ord_subtract(StatoFinale, StatoAttuale, DifferenzaStati),    
+    ord_subtract(StatoFinale, StatoAttuale, DifferenzaStati),
     include(is_on, DifferenzaStati, StatiOn),
-    length(StatiOn, Valore).
+    length(StatiOn, LunghezzaStatiOn),
+    Valore is max(1, LunghezzaStatiOn).
 
 ida_star(Soluzione) :-
     iniziale(S),
