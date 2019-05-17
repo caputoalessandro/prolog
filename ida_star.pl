@@ -1,17 +1,15 @@
 :- use_module(library(ordsets)).
+:- use_module(library(apply)).
 :- ["azioni.pl", "dominio.pl"].
+
+identity(X, X).
+is_on(X) :- identity(X, on(_, _)).
 
 euristica(StatoAttuale, Valore) :-
     goal(StatoFinale),
     ord_subtract(StatoFinale, StatoAttuale, DifferenzaStati),    
-    
-    findall(X,findon(DifferenzaStati,0),ListaOn),
-    
-    length(ListaOn, Valore).
-
-findon([],Risultato) :-
-    ord_memberchk(on(X,Y),DifferenzaStati).
-    
+    include(is_on, DifferenzaStati, StatiOn),
+    length(StatiOn, Valore).
 
 ida_star(Soluzione) :-
     iniziale(S),
