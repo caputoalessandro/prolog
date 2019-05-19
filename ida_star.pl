@@ -2,9 +2,7 @@
 :- use_module(library(apply)).
 :- ["azioni.pl", "dominio.pl"].
 
-identity(X, X).
-is_on(X) :-
-    identity(X, on(_, _)).
+is_on(on(_,_)).
 
 euristica(StatoAttuale, Valore) :-
     goal(StatoFinale),
