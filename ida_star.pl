@@ -14,17 +14,21 @@ euristica(StatoAttuale, Valore) :-
 ida_star(Soluzione) :-
     iniziale(S),
     euristica(S, SogliaMassima),
-    ida_star_aux(S, SogliaMassima, Soluzione).
+    ida_star_aux(Soluzione, SogliaMassima).
 
-ida_star_aux(S, SogliaMassima, Soluzione) :-
-    dfs_aux(S, Soluzione, [S], SogliaMassima).
+ida_star_aux(Soluzione, SogliaMassima) :-
+    depth_limit_search(Soluzione, SogliaMassima).
 
-ida_star_aux(S, SogliaMassimaAttuale, Soluzione) :-
+ida_star_aux(Soluzione, SogliaMassimaAttuale) :-
     findall(X, euristica_da_max_profondita(X), ListaEuristiche),
     min_list(ListaEuristiche, MinimoEuristiche),
     retractall(euristica_da_max_profondita(_)),
     NuovaSogliaMassima is SogliaMassimaAttuale+MinimoEuristiche,
-    ida_star_aux(S, NuovaSogliaMassima, Soluzione).
+    ida_star_aux(Soluzione, NuovaSogliaMassima).
+
+depth_limit_search(Soluzione, Soglia) :-
+    iniziale(S),
+    dfs_aux(S, Soluzione, [S], Soglia).
 
 dfs_aux(S, [], _, _) :-
     finale(S).
