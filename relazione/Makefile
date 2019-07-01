@@ -1,7 +1,7 @@
 OUT_DIR = out
 GEN_DIR = gen
 
-$(OUT_DIR)/relazione.pdf: $(wildcard *.md) | $(OUT_DIR)
+$(OUT_DIR)/relazione.pdf: $(wildcard src/*.md) | $(OUT_DIR)
 	pandoc -t latex --toc --listings --template $(CURDIR)/eisvogel.tex -o $@ $^
 
 $(OUT_DIR) $(GEN_DIR):
