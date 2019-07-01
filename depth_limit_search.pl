@@ -1,4 +1,3 @@
-:- use_module(library(ordsets)).
 :- ["azioni.pl", "dominio.pl"].
 
 
