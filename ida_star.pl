@@ -19,12 +19,11 @@ ida_star(Soluzione) :-
 ida_star_aux(Soluzione, SogliaMassima) :-
     cost_limit_search(Soluzione, SogliaMassima).
 
-ida_star_aux(Soluzione, SogliaMassimaAttuale) :-
-    findall(X, prossima_soglia(X), ListaEuristiche),
-    min_list(ListaEuristiche, MinimoEuristiche),
+ida_star_aux(Soluzione, _) :-
+    findall(X, prossima_soglia(X), ListaSoglie),
+    min_list(ListaSoglie, SogliaSuccessiva),
     retractall(prossima_soglia(_)),
-    NuovaSogliaMassima is SogliaMassimaAttuale+MinimoEuristiche,
-    ida_star_aux(Soluzione, NuovaSogliaMassima).
+    ida_star_aux(Soluzione, SogliaSuccessiva).
 
 cost_limit_search(Soluzione, CostoMaxCammino) :-
     iniziale(S),
