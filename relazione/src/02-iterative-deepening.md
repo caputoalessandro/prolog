@@ -1,6 +1,8 @@
 <!-- -->
 
-# Iterative Deepening
+# Ricerca non informata
+
+## Iterative Deepening
 
 Per l'implementazione dell'algoritmo di Iterative Deepening, abbiamo
 riutilizzato il codice riguardante la ricerca in profondità visto a lezione, in
@@ -45,8 +47,7 @@ iterative_deepening_aux(Soluzione, SogliaCorrente, SogliaMassima) :-
 `iterative_deepening` funge da interfaccia utente per il predicato. Accetta
 come parametri la soluzione e la soglia massima. Il predicato ausiliario
 `iterative_deepening_aux` accetta come ulteriore parametro `SogliaCorrente`,
-che rappresenta la profondità in cui si sta facendo esplorare
-`depth_limit_search` nell'iterazione corrente.
+che rappresenta la profondità di esplorazione nell'iterazione corrente.
 
 L'algoritmo inizia chiamando `iterative_deepening_aux` con soglia corrente 1.\
 `iterative_deepening_aux` esegue la ricerca in profondità con soglia
@@ -56,3 +57,4 @@ esegue i seguenti passi:
 -   unifica `SogliaSuccessiva` con il numero successivo di `SogliaCorrente`
 -   controlla se `SogliaSuccessiva <= SogliaMassima`. Se sì, richiama
     ricorsivamente `iterative_deepening_aux` con la soglia incrementata.
+

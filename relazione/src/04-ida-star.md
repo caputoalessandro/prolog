@@ -1,34 +1,39 @@
-# IDA*
+\newpage
+
+## IDA\*
 
 L'implementazione di IDA\* è simile a quella dell'Iterative Deepening. Ci sono
-due predicati principali: `ida_star` e `depth_limit_search` (e i loro
-corrispondenti predicati ausiliari). `depth_limit_search` ha il compito di
+due predicati principali: `ida_star` e `cost_limit_search` (e i loro
+corrispondenti predicati ausiliari). `cost_limit_search` ha il compito di
 eseguire la ricerca in profondità, mentre `ida_star` stabilisce la soglia
-massima di profondità per ogni iterazione per poi richiamare
-`depth_limit_search`.
+massima di ogni chiamata di `cost_limit_search`.
 
 Rispetto all'Iterative Deepening, c'è una differenza importante
-nell'implementazione di `depth_limit_search`. Se `depth_limit_search` non trova
+nell'implementazione della ricerca limitata. Se `cost_limit_search` non trova
 una soluzione una volta raggiunta la profondità massima, deve salvare le
 informazioni necessarie a stabilire la profondità di ricerca successiva.
 Abbiamo implementato questa feature usando il cut e una nuova clausola su
 `dfs_aux`.
 
 ```prolog
-dfs_aux(S, [Azione|AzioniTail], Visitati, Soglia) :-
-    Soglia>0,
+cost_limit_search(Soluzione, CostoMaxCammino) :-
+    iniziale(S),
+    dfs_aux(S, Soluzione, [S], 0, CostoMaxCammino).
+
+dfs_aux(S, _, _, CostoCammino, CostoMaxCammino) :-
+    CostoCammino>CostoMaxCammino,
     !,
-    applicabile(Azione, S),
-    trasforma(Azione, S, SNuovo),
-    \+ member(SNuovo, Visitati),
-    NuovaSoglia is Soglia-1,
-    dfs_aux(SNuovo, AzioniTail, [SNuovo|Visitati], NuovaSoglia).
-
-
-dfs_aux(S, _, _, _) :-
-    euristica(S, EuristicaDaMaxProfondita),
-    assert(euristica_da_max_profondita(EuristicaDaMaxProfondita)),
+    euristica(S, Euristica),
+    ProssimaSoglia is CostoCammino + Euristica,
+    assert(prossima_soglia(ProssimaSoglia)),
     false.
+
+dfs_aux(S, [], _, _, _) :-
+    finale(S).
 ```
 
-Quando la soglia scende a 0, si attiva la seconda clausola 
+In `dfs_aux`, invece di ricevere una soglia in input, si considerano il costo
+del cammino attuale e il costo massimo del cammino, che t
+
+Quando `dfs_aux` viene valutato con un `CostoCammino` minore del
+`CostoMaxCammino` scatta una seconda clausola, che a

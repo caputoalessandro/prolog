@@ -1,7 +1,15 @@
-# A\*
+\newpage
+
+# Ricerca informata
+
+Nell'implementazione degli algoritmi di ricerca informata, abbiamo anche tenuto
+in conto del fatto che i costi delle azioni potrebbero differire tra loro, e
+non essere necessariamente unitari.
+
+## A\*
 
 Nell'implementazione di A\*, inizialmente procediamo come nella ricerca in
-ampiezza. Per rappresentare gli stati usiamo dei funtori di tipo `nodo(F, C,
+ampiezza. Per rappresentare gli stati usiamo dei termini composti `nodo(F, C,
 Stato, Azioni)`, dove i parametri stanno a indicare:
 
 - `Stato`: La struttura corrente dello stato.
@@ -17,9 +25,8 @@ poniamo come primo parametro del funtore.
 Il corpo dell'algoritmo inizia da `a_star_aux`. Questa regola utilizza 3
 parametri:
 
-1. Una lista dove in testa c'è il nodo corrente da visitare e in coda tutti i
-   nodi restanti da visitare.
-2. Una lista contenente i nodi visitati.
+1. Una lista di nodi da visitare.
+2. Una lista di nodi visitati.
 3. La soluzione.
 
 ```prolog
@@ -32,10 +39,11 @@ a_star_aux(
     ...
 ```
 Per prima cosa cerchiamo tutte le azioni applicabili per lo stato corrente
-attraverso la funzione `findall` e le inseriamo nella lista degli applicabili.
+attraverso il predicato `findall` e le inseriamo nella lista degli applicabili.
 
-In seguito chiamiamo la regola `genera_figli` che genera tutti i figli del
-nodo corrente. Questi vengono poi inseriti nella coda dei nodi da visitare.
+In seguito chiamiamo la regola `genera_figli` che genera i figli del nodo
+corrente in base agli applicabili trovati. Questi nodi vengono poi inseriti
+nella coda dei nodi da visitare.
 
 ```prolog
   findall(Applicabile, applicabile(Applicabile, S), ListaApplicabili),
@@ -48,8 +56,9 @@ nodo corrente. Questi vengono poi inseriti nella coda dei nodi da visitare.
   append(Tail, ListaFigli, NuovaCoda),
 ```
 
-A questo punto ordiniamo i nodi nella coda attraverso `list_to_ord_set`. Infine
-richiamiamo ricorsivamente `a_star_aux` con la nuova lista di nodi da visitare.
+A questo punto i nodi vengono riordinati tramite `list_to_ord_set`, in modo che
+si trovino in ordine crescente rispetto a $f(x)$. Infine richiamiamo
+ricorsivamente `a_star_aux` con la nuova lista di nodi da visitare.
 
 ```prolog
   list_to_ord_set(NuovaCoda, NuovaCodaOrdinata),
@@ -63,6 +72,9 @@ Analizziamo ora la regola `genera_figli`. Questa regola contiene 4 parametri:
 3. La lista degli stati già visitati.
 4. La lista di output dei figli generati.
 
+Abbiamo scelto di far unificare gli argomenti di `nodo` nel corpo della regola
+al fine di renderla più leggibile.
+
 ```prolog
 genera_figli(
   Nodo,
@@ -74,8 +86,8 @@ genera_figli(
   ...
 ```
 
-Abbiamo deciso di far unificare gli argomenti all'interno dei nodi nel corpo
-della regola al fine di renderla più leggibile.
+La regola applica l'azione in testa alla lista degli applicabili, generando il
+nodo figlio, e calcola i suoi valori $g(x)$, $h(x)$ e $f(x)$.
 
 ```prolog
   trasforma(Applicabile, S, SNuovo),
@@ -93,9 +105,6 @@ della regola al fine di renderla più leggibile.
   ),
 ```
 
-La regola applica l'azione in testa alla lista degli applicabili, generando il
-nodo figlio, e calcola i nuovi valori di $g(n)$, $h(n)$ e $f(n)$.
-
 La regola viene poi richiamata ricorsivamente per tutte le azioni contenute
 nella coda della lista degli applicabili.
 
@@ -105,14 +114,13 @@ nella coda della lista degli applicabili.
 
 Se l'azione applicabile porta a uno stato già visitato la regola fallirà a
 causa del controllo `\+ member(SNuovo, Visitati)`. In questo caso verrà
-verificata una seconda clausola di `genera_figli` che procede direttamente alla
-computazione dell'azione successiva.
+verificata una seconda clausola di `genera_figli` che procede direttamente
+all'elaborazione del figlio successivo. In corrispondenza del controllo abbiamo
+inserito un cut in modo tale da non permettere erroneamente backtraking in
+questa clausola.
 
 ```prolog
 genera_figli(Nodo, [_|AltriApplicabili], Visitati, FigliTail) :-
     genera_figli(Nodo, AltriApplicabili, Visitati, FigliTail).
 ```
 
-In corrispondenza del controllo `member(SNuovo, Visitati)` abbiamo inserito
-un cut in modo tale da non fare erroneamente backtraking nella seconda
-clausola.

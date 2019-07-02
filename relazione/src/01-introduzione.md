@@ -9,11 +9,13 @@ lang: it
 titlepage: true
 toc-own-page: true
 listings-disable-line-numbers: true
+listings-no-page-break: true
 ---
 
-# Implementazione
+# Introduzione
 
 La consegna del progetto prevedeva l'implementazione degli algoritmi Iterative
-Deepening, A\* e IDA\*. Di seguito presentiamo, con i relativi commenti, le
+Deepening, A\* e IDA\*. Il dominio che abbiamo preso in considerazione è il
+mondo dei blocchi. Di seguito presentiamo, con i relativi commenti, le
 parti di codice più importanti delle implementazioni.
 
