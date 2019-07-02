@@ -21,7 +21,6 @@ fatti che descrivono lo stato finale e l'insieme dei fatti che descrivono lo
 stato finale, in modo da ottenere tutti i fatti che differiscono tra i due
 stati.
 
-<<<<<<< HEAD
 Abbiamo considerato solo i fatti `ontable(X,Y)` e `on(X)`
 poiché i fatti `clear` ci danno delle informazioni supreflue sulle differenze tra stato iniziale e stato finale. 
 
@@ -29,35 +28,14 @@ poiché i fatti `clear` ci danno delle informazioni supreflue sulle differenze t
 La regola ha due parametri, la soglia attuale e una variabile in cui inseriremo il valore dell'euristica calcolato. Per prima cosa effettuiamo la sottrazione tra insiemi attraverso la funzione `ord_subtract`,  successivamente contiamo le occorrenze dei fatti che ci interessano attraverso la funzione `include`.
 
 Abbiamo inserito inoltre due fatti che ci hanno permesso di inserire un unico parametro nella funzione `include` al fine di selezionare sia i fatti `on` che  i fatti `ontable`.
-=======
-Abbiamo considerato solo i fatti *ontable(X,Y)* e *on(X)* poiché i fatti
-*clear* ci danno delle informazioni supreflue sulle differenze tra stato
-iniziale e stato finale.
 
-## Euristica 1
-
-La regola ha due parametri, la soglia attuale e una variabile in cui inseriremo
-il valore dell'euristica calcolato. Per prima cosa effettuiamo la sottrazione
-tra insiemi attraverso la funzione `ord_subtract`, successivamente contiamo le
-occorrenze dei fatti che ci interessano attraverso la funzione *include*.
->>>>>>> a4259d0943c3c3577be8f984a610408640cf8829
-
-Abbiamo inserito inoltre due fatti che ci hanno permesso di inserire un unico
-parametro nella funzione *include* al fine di selezionare sia i fatti *on* che
-i fatti *ontable*.
 
 ``` {.prolog}
 is_on(on(_,_)).
 is_on(ontable(_)).
 ```
 
-<<<<<<< HEAD
 Infine inseriamo il risultato in una variabile utilizzando la funzione `max`, questo per evitare che l'algoritmo ricada in un ciclo infinito nel caso in cui il valore dell'euristica fosse 0.
-=======
-Infine inseriamo il risultato in una variabile utilizzando la funzione `max`,
-questo per evitare che l'algoritmo ricada in un ciclo infinito nel caso in cui
-il valore dell'euristica fosse 0.
->>>>>>> a4259d0943c3c3577be8f984a610408640cf8829
 
 ## Euristica 2
 
@@ -73,18 +51,6 @@ euristica(StatoAttuale, Valore) :-
     ValoreTable is LunghezzaStatiOntable,
     Valore is ValoreOn + ValoreTable.
 ```
-<<<<<<< HEAD
 L'implementazione della seconda euristica è molto simile a quella della prima, di fatto ci è bastato contare due volte il numero dei fatti `on` ottenuti dalla sottrazione degli insiemi.
 L'idea è quella di contare tutti  i fatti on in cui è presente un determinato cubo, quindi se nell'insieme della sottrazione ci fosse on(A,B) on(C,B) conteremmo due volte per il cubo B, una volta per il cubo A e una volta per il cubo C.
 Tutto ciò equivale a contare sempre due volte ogni `on` visto che in ognuno di questi fatti si trovano sempre due cubi differenti. 
-
-=======
->>>>>>> a4259d0943c3c3577be8f984a610408640cf8829
-
-L'implementazione della seconda euristica è molto simile a quella della prima,
-di fatto ci è bastato contare due volte il numero dei fatti `on` ottenuti dalla
-sottrazione degli insiemi. L'idea è quella di contare tutti i fatti on in cui è
-presente un determinato cubo, quindi se nell'insieme della sottrazione ci fosse
-on(A,B) on(C,B) conteremmo due volte per il cubo B, una volta per il cubo A e
-una volta per il cubo C. Tutto ciò equivale a contare sempre due volte ogni
-`on` visto che in ognuno di questi fatti si trovano sempre due cubi differenti.
