@@ -1,7 +1,5 @@
-:- ["azioni.pl"].
-
-% euristica(+Stato,-ValoreEuristica)
-euristica(_, 1).
+:- ["azioni.pl", "dominio.pl", "euristica_1.pl"].
+:- set_prolog_stack(global, limit(100 000 000 000)).
 
 a_star(Soluzione) :-
     iniziale(S),
