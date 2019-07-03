@@ -12,23 +12,35 @@ posizione corretta
 
 **Euristica 2**: Calcolare la differenza tra stato corrente e stato finale
 considerando la posizione di ogni blocco rispetto al blocco sottostante e
-sovrastante. Se il blocco A nello stato finale dovrebbe trovarsi sopra il
-blocco B e sotto il blocco C e nello stato corrente si trova sotto il blocco B
-e sopra il blocco C allora bisogna aggiungere il valore 2 all'euristica.
+sovrastante. Se il blocco `A` nello stato finale dovrebbe trovarsi sopra il
+blocco `B` e sotto il blocco `C` e nello stato corrente si trova sotto il blocco `B`
+e sopra il blocco `C` allora bisogna aggiungere il valore 2 all'euristica.
+
+## Implementazione
 
 L'idea è quella di considerare il risultato della sottrazione tra l'insieme dei
 fatti che descrivono lo stato finale e l'insieme dei fatti che descrivono lo
-stato finale, in modo da ottenere tutti i fatti che differiscono tra i due
+stato iniziale, in modo da ottenere tutti i fatti che differiscono tra i due
 stati.
 
 Abbiamo considerato solo i fatti `ontable(X,Y)` e `on(X)`
-poiché i fatti `clear` ci danno delle informazioni supreflue sulle differenze tra stato iniziale e stato finale. 
+poiché i fatti `clear` ci danno delle informazioni superflue sulle differenze tra stato iniziale e stato finale. 
 
 ### Euristica 1 
-La regola ha due parametri, la soglia attuale e una variabile in cui inseriremo il valore dell'euristica calcolato. Per prima cosa effettuiamo la sottrazione tra insiemi attraverso la funzione `ord_subtract`,  successivamente contiamo le occorrenze dei fatti che ci interessano attraverso la funzione `include`.
+
+```prolog
+euristica(StatoAttuale, Valore) :-
+    goal(StatoFinale),
+    ord_subtract(StatoFinale, StatoAttuale, DifferenzaStati),
+    include(is_on, DifferenzaStati, StatiOn),
+    length(StatiOn, LunghezzaStatiOn),
+    Valore is max(1,LunghezzaStatiOn).
+
+```
+
+La regola ha due parametri, la soglia attuale e una variabile in cui inseriamo il valore dell'euristica calcolato. Per prima cosa effettuiamo la sottrazione tra insiemi attraverso la funzione `ord_subtract`,  successivamente selezioniamo i fatti che ci interessano (tutti tranne i `clear`) utilizzando la funzione `include`.
 
 Abbiamo inserito inoltre due fatti che ci hanno permesso di inserire un unico parametro nella funzione `include` al fine di selezionare sia i fatti `on` che  i fatti `ontable`.
-
 
 ``` {.prolog}
 is_on(on(_,_)).
@@ -51,6 +63,13 @@ euristica(StatoAttuale, Valore) :-
     ValoreTable is LunghezzaStatiOntable,
     Valore is ValoreOn + ValoreTable.
 ```
-L'implementazione della seconda euristica è molto simile a quella della prima, di fatto ci è bastato contare due volte il numero dei fatti `on` ottenuti dalla sottrazione degli insiemi.
-L'idea è quella di contare tutti  i fatti on in cui è presente un determinato cubo, quindi se nell'insieme della sottrazione ci fosse on(A,B) on(C,B) conteremmo due volte per il cubo B, una volta per il cubo A e una volta per il cubo C.
-Tutto ciò equivale a contare sempre due volte ogni `on` visto che in ognuno di questi fatti si trovano sempre due cubi differenti. 
+L'implementazione della seconda euristica è molto simile a quella della prima. Di fatto ci è bastato incrementare di due il valore dell'euristica per ogni fatto `on` presente nell'insieme risultante dalla sottrazione dei due insiemi.
+
+La strategia è quella di contare tutti  i fatti `on` riguardanti un determinato cubo. Se nell'insieme risultante da `ordsubtract` ci fosse `on(A,B) on(C,B)` l'euristica incrementerebbe di due a causa del cubo `B`, perché si troverebbe nella posizione errata sia rispetto al cubo sovrastante sia rispetto al cubo sottostante.
+Successivamente incrementerebbe di uno per il cubo `A` e ancora di uno per il cubo `C`.
+Dal momento che ogni fatto `on` si riferisce a due cubi distinti ci basta incrementare l'euristica di due per ognuno dei fatti `on`  presenti nell'insieme risultante dalla sottrazione.
+
+## Considerazioni
+
+
+
