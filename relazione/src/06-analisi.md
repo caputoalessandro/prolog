@@ -66,7 +66,7 @@ Intel Core i5 5200U 2,70 GHz 8GB RAM
 
 | Algorithms           |Number of Inferences  | Execution Time (s)  | Lips                    | First Solution length |
 |---                   |---                   |---                  |---                      |---                    |
-| Iterative deepening  |                      |                     |                         |                       |
+| Iterative deepening  |471,965,663           |54.858               |8603383                  |16                     |
 | A*                   |           |              |                 |                     |
 | IDA*                 |         |              |                 |                     |
 
