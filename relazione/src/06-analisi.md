@@ -90,11 +90,11 @@ Intel Core i5 5200U 2,70 GHz 8GB RAM
 
 **Dominio 3**
 
-| Algorithms          | Number of Inferences | Execution Time (s) | Lips | First Solution length |
-| ------------------- | -------------------- | ------------------ | ---- | --------------------- |
-| Iterative deepening |                      |                    |      |                       |
-| A*                  |                      |                    |      |                       |
-| IDA*                |                      |                    |      |                       |
+| Algorithms          | Number of Inferences | Execution Time (s) | Lips    | First Solution length |
+| ------------------- | -------------------- | ------------------ | ------- | --------------------- |
+| Iterative deepening | 471,965,663          | 54.858             | 8603383 | 16                    |
+| A*                  | 5,587,396            | 2.168              | 2577590 | 16                    |
+| IDA*                | 74,085,129           | 8.010              | 9249367 | 16                    |
 
 ## Costo variabile
 
