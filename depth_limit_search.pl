@@ -1,4 +1,4 @@
-:- ["azioni.pl", "dominio.pl"].
+:- ["azioni.pl"].
 
 
 depth_limit_search(Soluzione, Soglia) :-

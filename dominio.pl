@@ -1,9 +1,10 @@
 % stato iniziale    stato finale
+%
 %                   a
 % a                 b
 % b d               c
 % c e               d e
-
+%---------------    ------------
 block(a).
 block(b).
 block(c).
