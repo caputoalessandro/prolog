@@ -49,7 +49,7 @@ is_on(ontable(_)).
 
 Infine inseriamo il risultato in una variabile utilizzando la funzione `max`, questo per evitare che l'algoritmo ricada in un ciclo infinito nel caso in cui il valore dell'euristica fosse 0.
 
-## Euristica 2
+### Euristica 2
 
 ``` {.prolog}
 euristica(StatoAttuale, Valore) :-
@@ -69,7 +69,66 @@ La strategia è quella di contare tutti  i fatti `on` riguardanti un determinato
 Successivamente incrementerebbe di uno per il cubo `A` e ancora di uno per il cubo `C`.
 Dal momento che ogni fatto `on` si riferisce a due cubi distinti ci basta incrementare l'euristica di due per ognuno dei fatti `on`  presenti nell'insieme risultante dalla sottrazione.
 
-## Considerazioni
+## Analisi
+Abbiamo confrontato i tre algoritmi su tre domini e utilizzando due euristiche differenti.
+I parametri utilizzati per il confronto sono quattro:
 
+* Number of  inferences: Il numero di inferenze effettuato dall'algoritmo in un esecuzione
+* Execution Time: Tempo di un esecuzione in secondi
+* Number of lips: Logical Inferences Per Second
+* First Solution length: Il numero di passi presenti nella prima soluzione trovata.
 
+Infine abbiamo confrontato i tre algoritmi su uno stesso dominio ma assegnando alle azioni un costo variabile.
 
+## Euristica 1
+
+**Dominio 1**
+| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips                    | First Solution length |
+|---                   |---                   |---                  |---                      |---                    |
+| Iterative deepening  |3,331,110             |0.367                |9077721                  |12                     |
+| A*                   |2,045,469             |0,621                |3292351                  |12                     |
+| IDA*                 |2,867,645             |0,318                |9004802                  |12                     |
+
+**Dominio 2**
+| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips          | First Solution length |
+|---                   |---                   |---                  |---                      |---                    |
+| Iterative deepening  |                      |                     |                         |                       |
+| A*                   |             |               |              |                     |
+| IDA*                 |             |                |             |                     |
+
+**Dominio 3**
+| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips                    | First Solution length |
+|---                   |---                   |---                  |---                      |---                    |
+| Iterative deepening  |                      |                     |                         |                       |
+| A*                   |669,712,233           |591.843              |1132118                  |16                     |
+| IDA*                 |1,062,698,192         |118.285              |8984192                  |16                     |
+
+## Euristica 2
+
+**Dominio 1**
+| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips                    | First Solution length |
+|---                   |---                   |---                  |---                      |---                    |
+| Iterative deepening  |                      |                     |                         |                       |
+| A*                   |2,045,469             |0,621                |3292351                  |12                     |
+| IDA*                 |2,867,645             |0,318                |9004802                  |12                     |
+
+**Dominio 2**
+| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips          | First Solution length |
+|---                   |---                   |---                  |---                      |---                    |
+| Iterative deepening  |                      |                     |                         |                       |
+| A*                   |2,045,469             |0,621                |3292351                  |12                     |
+| IDA*                 |2,867,645             |0,318                |9004802                  |12                     |
+
+**Dominio 3**
+| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips          | First Solution length |
+|---                   |---                   |---                  |---                      |---                    |
+| Iterative deepening  |                      |                     |                         |                       |
+| A*                   |2,045,469             |0,621                |3292351                  |12                     |
+| IDA*                 |2,867,645             |0,318                |9004802                  |12                     |
+
+## Costo variabile 
+| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips          | First Solution length |
+|---                   |---                   |---                  |---                      |---                    |
+| Iterative deepening  |                      |                     |                         |                       |
+| A*                   |2,045,469             |0,621                |3292351                  |12                     |
+| IDA*                 |2,867,645             |0,318                |9004802                  |12                     |

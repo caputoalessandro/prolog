@@ -1,6 +1,6 @@
 :- use_module(library(ordsets)).
 :- use_module(library(apply)).
-:- ["azioni.pl", "dominio.pl", "euristica_1.pl"].
+:- ["azioni.pl", "dominio2.pl", "euristica_1.pl"].
 
 ida_star(Soluzione) :-
     iniziale(S),

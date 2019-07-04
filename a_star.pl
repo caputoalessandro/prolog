@@ -1,4 +1,4 @@
-:- ["azioni.pl", "dominio.pl", "euristica_1.pl"].
+:- ["azioni.pl", "dominio2.pl", "euristica_1.pl"].
 :- set_prolog_stack(global, limit(100 000 000 000)).
 
 a_star(Soluzione) :-
@@ -38,3 +38,5 @@ genera_figli(nodo(CostoPiuEuristica, Costo, S, AzioniPerS), [_|AltriApplicabili]
                  AltriApplicabili,
                  Visitati,
                  FigliTail).
+
+
