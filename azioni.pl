@@ -3,8 +3,6 @@
 % Gli stati sono rappresentati con insiemi ordinati
 
 :- use_module(library(ordsets)).
-:- ["dominio.pl"].
-
 
 applicabile(pickup(X), S) :-
     block(X),

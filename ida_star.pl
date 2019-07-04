@@ -1,8 +1,8 @@
 :- use_module(library(ordsets)).
 :- use_module(library(apply)).
-:- ["azioni.pl", "dominio3.pl", "euristica_1.pl"].
+:- ["azioni.pl", "dominio2.pl", "euristica_1.pl"].
+:- set_prolog_stack(global, limit(100 000 000 000)).
 
-:- set_prolog_stack(global, limit(10*10**9)).
 
 :- (dynamic prossima_soglia/1).
 
