@@ -1,20 +1,24 @@
 :- use_module(library(ordsets)).
 :- use_module(library(apply)).
-:- ["azioni.pl", "dominio2.pl", "euristica_1.pl"].
+:- ["azioni.pl", "dominio3.pl", "euristica_1.pl"].
+
+:- set_prolog_stack(global, limit(10*10**9)).
+
+:- (dynamic prossima_soglia/1).
 
 ida_star(Soluzione) :-
     iniziale(S),
     euristica(S, SogliaMassima),
-    ida_star_aux(Soluzione, SogliaMassima).
+    assert_prossima_soglia(SogliaMassima),
+    ida_star_aux(Soluzione).
 
-ida_star_aux(Soluzione, SogliaMassima) :-
-    cost_limit_search(Soluzione, SogliaMassima).
+ida_star_aux(Soluzione) :-
+    prossima_soglia(SogliaSuccessiva),
+    retract(prossima_soglia(_)),
+    cost_limit_search(Soluzione, SogliaSuccessiva).
 
-ida_star_aux(Soluzione, _) :-
-    findall(X, prossima_soglia(X), ListaSoglie),
-    min_list(ListaSoglie, SogliaSuccessiva),
-    retractall(prossima_soglia(_)),
-    ida_star_aux(Soluzione, SogliaSuccessiva).
+ida_star_aux(Soluzione) :-
+    ida_star_aux(Soluzione).
 
 cost_limit_search(Soluzione, CostoMaxCammino) :-
     iniziale(S),
@@ -24,8 +28,8 @@ dfs_aux(S, _, _, CostoCammino, CostoMaxCammino) :-
     CostoCammino>CostoMaxCammino,
     !,
     euristica(S, Euristica),
-    ProssimaSoglia is CostoCammino + Euristica,
-    assert(prossima_soglia(ProssimaSoglia)),
+    ProssimaSoglia is CostoCammino+Euristica,
+    assert_prossima_soglia(ProssimaSoglia),
     false.
 
 dfs_aux(S, [], _, _, _) :-
@@ -39,5 +43,13 @@ dfs_aux(S, [Azione|AzioniTail], Visitati, CostoCammino, CostoMaxCammino) :-
     NuovoCostoCammino is CostoCammino+CostoAzione,
     dfs_aux(SNuovo, AzioniTail, [SNuovo|Visitati], NuovoCostoCammino, CostoMaxCammino).
 
+assert_prossima_soglia(NuovaSoglia) :-
+    prossima_soglia(SogliaPrecedente),
+    NuovaSoglia>=SogliaPrecedente,
+    !.
+
+assert_prossima_soglia(NuovaSoglia) :-
+    retractall(prossima_soglia(_)),
+    assert(prossima_soglia(NuovaSoglia)).
 
 % ida_star_aux(S, [Azione|AzioniTail], Visitati, CostoAttuale) :-
