@@ -98,7 +98,7 @@ ritrae il predicato `prossima_soglia` e si procede a
 effettuare la ricerca con limite di costo `Soglia`.
 Se `cost_limit_search` non trova una soluzione, `ida_star_aux` si richiama
 ricorsivamente, in modo che venga eseguita una nuova ricerca limitata nel
-costo con il valore di soglia trovato nell'iterazione precedente.
+costo con il nuovo valore di soglia trovato.
 
 L'algoritmo parte con il predicato `ida_star(Soluzione)`, che asserisce la
 soglia al valore dell'euristica sullo stato iniziale e fa partire
