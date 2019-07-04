@@ -48,59 +48,59 @@ Intel Core i5 5200U 2,70 GHz 8GB RAM
 
 **Dominio 1**
 
-| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips                    | First Solution length |
-|---                   |---                   |---                  |---                      |---                    |
-| Iterative deepening  |3,331,110             |0.367                |9077721                  |12                     |
-| A*                   |2,045,469             |0,621                |3292351                  |12                     |
-| IDA*                 |2,862,494             |0.325                |8797702                  |12                     |
+| Algorithms          | Number of Inferences | Execution Time (s) | Lips    | First Solution length |
+| ------------------- | -------------------- | ------------------ | ------- | --------------------- |
+| Iterative deepening | 3,331,110            | 0.367              | 9077721 | 12                    |
+| A*                  | 2,045,469            | 0,621              | 3292351 | 12                    |
+| IDA*                | 2,862,494            | 0.325              | 8797702 | 12                    |
 
 **Dominio 2**
 
-| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips          | First Solution length |
-|---                   |---                   |---                  |---            |---                    |
-| Iterative deepening  |1,536,727,053         |187.355              |8202216        |10                     |
-| A*                   |?                     |?                    |?              |?                      |
-| IDA*                 |10,766,835,266        |1195.656             |9004961        |10                     |
+| Algorithms          | Number of Inferences | Execution Time (s) | Lips    | First Solution length |
+| ------------------- | -------------------- | ------------------ | ------- | --------------------- |
+| Iterative deepening | 1,536,727,053        | 187.355            | 8202216 | 10                    |
+| A*                  | ?                    | ?                  | ?       | ?                     |
+| IDA*                | 10,766,835,266       | 1195.656           | 9004961 | 10                    |
 
 **Dominio 3**
 
-| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips                    | First Solution length |
-|---                   |---                   |---                  |---                      |---                    |
-| Iterative deepening  |471,965,663           |54.858               |8603383                  |16                     |
-| A*                   |           |              |                 |                     |
-| IDA*                 |         |              |                 |                     |
+| Algorithms          | Number of Inferences | Execution Time (s) | Lips    | First Solution length |
+| ------------------- | -------------------- | ------------------ | ------- | --------------------- |
+| Iterative deepening | 471,965,663          | 54.858             | 8603383 | 16                    |
+| A*                  | 669,712,233          | 563.830            | 1187792 | 16                    |
+| IDA*                |                      |                    |         |                       |
 
 ## Euristica 2
 
 **Dominio 1**
 
-| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips                    | First Solution length |
-|---                   |---                   |---                  |---                      |---                    |
-| Iterative deepening  |3,331,110             |0.367                |9077721                  |12                     |
-| A*                   |             |                |                 |                     |
-| IDA*                 |             |                |                  |                    |
+| Algorithms          | Number of Inferences | Execution Time (s) | Lips    | First Solution length |
+| ------------------- | -------------------- | ------------------ | ------- | --------------------- |
+| Iterative deepening | 3,331,110            | 0.367              | 9077721 | 12                    |
+| A*                  |                      |                    |         |                       |
+| IDA*                |                      |                    |         |                       |
 
 **Dominio 2**
 
-| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips          | First Solution length |
-|---                   |---                   |---                  |---                      |---                    |
-| Iterative deepening  |1,536,727,053         |187.355              |8202216        |10                     |
-| A*                   |             |               |                  |                    |
-| IDA*                 |            |                |                  |                     |
+| Algorithms          | Number of Inferences | Execution Time (s) | Lips    | First Solution length |
+| ------------------- | -------------------- | ------------------ | ------- | --------------------- |
+| Iterative deepening | 1,536,727,053        | 187.355            | 8202216 | 10                    |
+| A*                  |                      |                    |         |                       |
+| IDA*                |                      |                    |         |                       |
 
 **Dominio 3**
 
-| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips          | First Solution length |
-|---                   |---                   |---                  |---                      |---                    |
-| Iterative deepening  |                      |                     |                         |                       |
-| A*                   |            |                |                  |                     |
-| IDA*                 |            |                |                  |                    |
+| Algorithms          | Number of Inferences | Execution Time (s) | Lips | First Solution length |
+| ------------------- | -------------------- | ------------------ | ---- | --------------------- |
+| Iterative deepening |                      |                    |      |                       |
+| A*                  |                      |                    |      |                       |
+| IDA*                |                      |                    |      |                       |
 
 ## Costo variabile
 
 Calcolato sul terzo dominio
-| Algorithms           |Number of Inferences  | Execution Time (s)  | Lips          | First Solution length |
-|---                   |---                   |---                  |---                      |---                    |
-| Iterative deepening  |                      |                     |                         |                       |
-| A*                   |             |                |                 |                     |
-| IDA*                 |             |                |                 |                    |
+| Algorithms          | Number of Inferences | Execution Time (s) | Lips | First Solution length |
+| ------------------- | -------------------- | ------------------ | ---- | --------------------- |
+| Iterative deepening |                      |                    |      |                       |
+| A*                  |                      |                    |      |                       |
+| IDA*                |                      |                    |      |                       |
