@@ -12,8 +12,8 @@ Rispetto all'Iterative Deepening, c'è una differenza importante
 nell'implementazione della ricerca limitata. Se `cost_limit_search` non trova
 una soluzione una volta raggiunta la profondità massima, deve salvare le
 informazioni necessarie a stabilire la profondità di ricerca successiva.
-Abbiamo implementato questa feature usando il cut e una nuova clausola su
-`dfs_aux`.
+Abbiamo implementato questa feature usando il cut, un nuovo predicato
+`assert_prossima_soglia` e una nuova clausola su `dfs_aux`.
 
 ```prolog
 cost_limit_search(Soluzione, CostoMaxCammino) :-
@@ -24,8 +24,8 @@ dfs_aux(S, _, _, CostoCammino, CostoMaxCammino) :-
     CostoCammino>CostoMaxCammino,
     !,
     euristica(S, Euristica),
-    ProssimaSoglia is CostoCammino + Euristica,
-    assert(prossima_soglia(ProssimaSoglia)),
+    Soglia is CostoCammino+Euristica,
+    assert_prossima_soglia(Soglia),
     false.
 
 dfs_aux(S, [], _, _, _) :-
@@ -36,7 +36,7 @@ In `dfs_aux`, invece di ricevere una soglia in input, si considerano il costo
 del cammino attuale e il costo massimo del cammino. Quando `dfs_aux` viene
 valutato con un `CostoCammino > CostoMaxCammino`, questo calcola la stima del
 costo per arrivare allo stato finale usando `CostoCammino` e la funzione
-euristica, per poi asserire il valore ottenuto in un fatto
+euristica, per poi asserire il valore ottenuto nel predicato dinamico
 `prossima_soglia(S)`. Il predicato poi fallisce per permettere di continuare la
 ricerca.
 
@@ -53,31 +53,61 @@ dfs_aux(
   costo(Azione, CostoAzione),
   NuovoCostoCammino is CostoCammino+CostoAzione,
   dfs_aux(
-    SNuovo, AzioniTail, [SNuovo|Visitati], 
+    SNuovo, AzioniTail, [SNuovo|Visitati],
     NuovoCostoCammino, CostoMaxCammino
   ).
 ```
 
+L'asserzione di `prossima_soglia` avviene tramite il predicato
+`assert_prossima_soglia(NuovaSoglia)`. Questo controlla se il valore di
+`NuovaSoglia` sia maggiore o uguale a un eventuale valore della soglia asserito
+in precedenza. Se sì, il predicato esegue un cut e non effettua altre
+operazioni, dato che ci interessa salvare solo il valore minimo tra quelli delle soglie trovate.
+
+Se invece non c'è una soglia salvata in precedenza, o se la `NuovaSoglia` è
+minore di questa, `assert_prossima_soglia` procede a effettuare la `retract`
+della soglia precedente e ad asserire quella nuova.
+
+```prolog
+assert_prossima_soglia(NuovaSoglia) :-
+    prossima_soglia(SogliaPrecedente),
+    NuovaSoglia>=SogliaPrecedente,
+    !.
+
+assert_prossima_soglia(NuovaSoglia) :-
+    retractall(prossima_soglia(_)),
+    assert(prossima_soglia(NuovaSoglia)).
+```
+
 Se alla fine della ricerca in profondità non è stata trovata una soluzione,
 l'algoritmo fa partire una nuova ricerca, usando come nuova soglia massima la
-soglia minima tra quelle asserite in `prossima_soglia`. Questa logica è gestita
+soglia asserita in `prossima_soglia`. Questa logica è gestita
 all'interno di `ida_star_aux`:
 
 ```prolog
-ida_star_aux(Soluzione, SogliaMassima) :-
-    cost_limit_search(Soluzione, SogliaMassima).
+ida_star_aux(Soluzione) :-
+    prossima_soglia(Soglia),
+    retract(prossima_soglia(_)),
+    cost_limit_search(Soluzione, Soglia).
 
-ida_star_aux(Soluzione, _) :-
-    findall(X, prossima_soglia(X), ListaSoglie),
-    min_list(ListaSoglie, SogliaSuccessiva),
-    retractall(prossima_soglia(_)),
-    ida_star_aux(Soluzione, SogliaSuccessiva).
+ida_star_aux(Soluzione) :- ida_star_aux(Soluzione).
 ```
 
-Con `findall`, si trovano tutti i valori `X` che unificano con
-`prossima_soglia(X)`, che vengono inseriti nella variabile di output
-`ListaSoglie`. Si ricava poi il minimo dei valori tramite `min_list`, si esegue
-la `retract` dei fatti `prossima_soglia` (che altrimenti andrebbero a
-interferire nell'esecuzione successiva del predicato) e si procede a chiamare
-ricorsivamente `ida_star_aux` con la nuova soglia trovata. Questi passi vengono
-eseguiti finché non viene trovata una soluzione.
+Tramite `ida_star_aux`, si trova la soglia tramite `prossima_soglia(Soglia)`, si
+ritrae il predicato `prossima_soglia` e si procede a
+effettuare la ricerca con limite di costo `Soglia`.
+Se `cost_limit_search` non trova una soluzione, `ida_star_aux` si richiama
+ricorsivamente, in modo che venga eseguita una nuova ricerca limitata nel
+costo con il valore di soglia trovato nell'iterazione precedente.
+
+L'algoritmo parte con il predicato `ida_star(Soluzione)`, che asserisce la
+soglia al valore dell'euristica sullo stato iniziale e fa partire
+`ida_star_aux(Soluzione)`.
+
+```prolog
+ida_star(Soluzione) :-
+    iniziale(S),
+    euristica(S, SogliaIniziale),
+    assert_prossima_soglia(SogliaIniziale),
+    ida_star_aux(Soluzione).
+```

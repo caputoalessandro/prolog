@@ -8,14 +8,14 @@
 
 ida_star(Soluzione) :-
     iniziale(S),
-    euristica(S, SogliaMassima),
-    assert_prossima_soglia(SogliaMassima),
+    euristica(S, SogliaIniziale),
+    assert_prossima_soglia(SogliaIniziale),
     ida_star_aux(Soluzione).
 
 ida_star_aux(Soluzione) :-
-    prossima_soglia(SogliaSuccessiva),
+    prossima_soglia(Soglia),
     retract(prossima_soglia(_)),
-    cost_limit_search(Soluzione, SogliaSuccessiva).
+    cost_limit_search(Soluzione, Soglia).
 
 ida_star_aux(Soluzione) :-
     ida_star_aux(Soluzione).
@@ -28,8 +28,8 @@ dfs_aux(S, _, _, CostoCammino, CostoMaxCammino) :-
     CostoCammino>CostoMaxCammino,
     !,
     euristica(S, Euristica),
-    ProssimaSoglia is CostoCammino+Euristica,
-    assert_prossima_soglia(ProssimaSoglia),
+    Soglia is CostoCammino+Euristica,
+    assert_prossima_soglia(Soglia),
     false.
 
 dfs_aux(S, [], _, _, _) :-
