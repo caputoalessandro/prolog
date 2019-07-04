@@ -1,4 +1,4 @@
-:- ["depth_limit_search.pl", "dominio2.pl"].
+:- ["depth_limit_search.pl", "dominio.pl"].
 :- set_prolog_stack(global, limit(100 000 000 000)).
 
 iterative_deepening(Soluzione, SogliaMax) :-

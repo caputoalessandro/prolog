@@ -64,11 +64,11 @@ Intel Core i5 5200U 2,70 GHz 8GB RAM
 
 **Dominio 3**
 
-| Algorithms          | Number of Inferences | Execution Time (s) | Lips    | First Solution length |
-| ------------------- | -------------------- | ------------------ | ------- | --------------------- |
-| Iterative deepening | 471,965,663          | 54.858             | 8603383 | 16                    |
-| A*                  | 669,712,233          | 563.830            | 1187792 | 16                    |
-| IDA*                |                      |                    |         |                       |
+| Algorithms          | Number of Inferences | Execution Time (s) | Lips     | First Solution length |
+| ------------------- | -------------------- | ------------------ | -------- | --------------------- |
+| Iterative deepening | 471,965,663          | 54.858             | 8603383  | 16                    |
+| A*                  | 669,712,233          | 563.830            | 1187792  | 16                    |
+| IDA*                | 1,579,600,374        | 138.929            | 11369810 | 16                    |
 
 ## Euristica 2
 
@@ -77,16 +77,16 @@ Intel Core i5 5200U 2,70 GHz 8GB RAM
 | Algorithms          | Number of Inferences | Execution Time (s) | Lips    | First Solution length |
 | ------------------- | -------------------- | ------------------ | ------- | --------------------- |
 | Iterative deepening | 3,331,110            | 0.367              | 9077721 | 12                    |
-| A*                  |                      |                    |         |                       |
-| IDA*                |                      |                    |         |                       |
+| A*                  | 174,894              | 0.037              | 4682229 | 12                    |
+| IDA*                | 5,930,528            | 0.651              | 9112884 | 12                    |
 
 **Dominio 2**
 
 | Algorithms          | Number of Inferences | Execution Time (s) | Lips    | First Solution length |
 | ------------------- | -------------------- | ------------------ | ------- | --------------------- |
 | Iterative deepening | 1,536,727,053        | 187.355            | 8202216 | 10                    |
-| A*                  |                      |                    |         |                       |
-| IDA*                |                      |                    |         |                       |
+| A*                  | 37,874,888           | 23.033             | 1644371 | 10                    |
+| IDA*                | 10,947,466,831       | 1203.364           | 9097384 | 10                    |
 
 **Dominio 3**
 
