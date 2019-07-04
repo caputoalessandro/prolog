@@ -12,7 +12,7 @@ listings-disable-line-numbers: true
 listings-no-page-break: true
 ---
 
-# Implementazione
+# Introduzione
 
 La consegna del progetto prevedeva l'implementazione degli algoritmi Iterative
 Deepening, A\* e IDA\*, e di provarli in diversi contesti in uno stesso dominio.
