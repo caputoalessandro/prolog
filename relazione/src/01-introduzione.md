@@ -7,6 +7,9 @@ author:
   - Alessandro Caputo
 lang: it
 titlepage: true
+titlepage-color: 3d5a6c
+titlepage-text-color: FFFFFF
+titlepage-rule-color: FFFFFF
 toc-own-page: true
 listings-disable-line-numbers: true
 listings-no-page-break: true
