@@ -103,3 +103,24 @@ c   f               a   d
 | IDA\*               |  74,085,129 |              8.010 | 9249367 |                    16 |
 
 : Dominio 3, risultati con seconda euristica
+
+
+
+![Confronto dei risultati per il terzo dominio](Istogrammi/a.png)
+
+**Confronto  euristiche  con costi variabili**
+Abbiamo assegnato costo 3 alle azioni `stack` e `unstack` e costo 1 alle azioni `putdown` e `pickup`.
+
+: Dominio 3, risultati con prima euristica
+
+| Algorithms          |  Inferences | Execution Time (s) |    Lips | First Solution length |
+| ------------------- | ----------: | -----------------: | ------: | --------------------: |
+| A\*                 |   5,587,396 |              2.168 | 2577590 |                    16 |
+| IDA\*               |  74,085,129 |              8.010 | 9249367 |                    16 |
+
+: Dominio 3, risultati con seconda euristica
+
+| Algorithms          |  Inferences | Execution Time (s) |    Lips | First Solution length |
+| ------------------- | ----------: | -----------------: | ------: | --------------------: |
+| A\*                 |   5,587,396 |              2.168 | 2577590 |                    16 |
+| IDA\*               |  74,085,129 |              8.010 | 9249367 |                    16 |
