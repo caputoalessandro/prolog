@@ -23,7 +23,7 @@ genera_figli(_, [], _, []).
 
 genera_figli(Nodo, [Applicabile|AltriApplicabili], Visitati, [Figlio|FigliTail]) :-
     Nodo=nodo(_, Costo, S, AzioniPerS),
-    trasforma(Applicabile, S, SNuovo),
+    trasforma(Applicabile, S, SNuovo),  
     \+ member(SNuovo, Visitati),
     !,
     euristica(SNuovo, Euristica),
