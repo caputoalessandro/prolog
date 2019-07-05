@@ -5,7 +5,7 @@
 Abbiamo confrontato i tre algoritmi su tre domini e utilizzando due euristiche differenti.
 I parametri utilizzati per il confronto sono quattro:
 
-- Number of inferences: Il numero di inferenze effettuato dall'algoritmo in un esecuzione
+- inferences: Il numero di inferenze effettuato dall'algoritmo in un esecuzione
 - Execution Time: Tempo di un esecuzione in secondi
 - Number of lips: Logical Inferences Per Second
 - First Solution length: Il numero di passi presenti nella prima soluzione trovata.
@@ -14,7 +14,7 @@ Infine abbiamo confrontato i tre algoritmi su uno stesso dominio ma assegnando a
 
 Caratteristiche macchina utilizzata:
 
-* SO Ubuntu 18.04 
+* SO Ubuntu 18.04 LTS
 * Processore Intel Core i5 5200U
 * Frequenza Massima 2,70 GHz
 * Chache 3 MB
@@ -149,17 +149,13 @@ Il tempo d'esecuzione dell'iterative deepening nel dominio tre è di $\approx$ 1
 
 Questo dimostra come la prima euristica sia decisamente poco efficace. Di fatto rende i due algoritmi basati su ricerca informata meno efficenti di un algoritmo di ricerca non informata.
 
-Per quanto riguarda il confronto degli algoritmi a ricerca informata per costi differenti, notiamo come questo causi un ribaltamento delle prestazioni tra i due algoritmi.
-Infatti utilizzando la prima euristica,  `A*` risulta più efficente di `IDA*`,utilizzando la seconda accade esattamente il contrario.
+Per quanto riguarda il confronto degli algoritmi a ricerca informata per costi differenti, notiamo come questi causino un leggero miglioramento con l'utilizzo della prima euristica, ma un importante peggioramento con l'utilizzo della seconda euristica.
 
-Infine notiamo come aumentando il costo di determinate azioni, gli algoritmi a ricerca informata funzionino leggermente meglio utilizzando la prima euristica ma peggiorino decisamente utilizzando la seconda.
+Aumentando il costo di determinate azioni, gli algoritmi a ricerca informata funzionano leggermente meglio utilizzando la prima euristica, peggiorino decisamente utilizzando la seconda.
 
-Un ultima osservazione va fatta riguardo le dimensioni e le complessità dei domini testati. Le relazioni ottenute tra gli algoritmi per il dominio 3 si mantengono per tutti i domini ad eccezione del dominio due, ovvero il più complesso.
+Un ultima osservazione va fatta riguardo le dimensioni e le complessità dei domini testati. Le relazioni ottenute tra gli algoritmi per il dominio 3, si mantengono per tutti i domini ad eccezione del dominio due, ovvero il più complesso.
 
 In questo caso, per quanto riguarda la prima euristica, non siamo riusciti ad ottenere dati riguardo l'algoritmo `A*`. l'esecuzione infatti è terminata a  causa dell'esaurimento della memoria.
 
 Per quanto riguarda l'utilizzo della seconda euristica invece, vediamo come `IDA*` abbia prestazioni stranamente peggiori tra tutti gli algoritmi, con un tempo di esecuzione di ben $\approx$ 20 minuti.
-
-fare media eurisica due dominio tre.
-controllare ida*  euristica due, dominio 2.
 
