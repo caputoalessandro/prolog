@@ -35,13 +35,13 @@ dfs_aux(S, [], _, _, _) :-
 In `dfs_aux`, invece di ricevere una soglia in input, si considerano il costo
 del cammino attuale e il costo massimo del cammino. Quando `dfs_aux` viene
 valutato con un `CostoCammino > CostoMaxCammino`, questo calcola la stima del
-costo per arrivare allo stato finale usando `CostoCammino` e la funzione
-euristica, per poi asserire il valore ottenuto nel predicato dinamico
-`prossima_soglia(S)`. Il predicato poi fallisce per permettere di continuare la
-ricerca.
+costo per arrivare allo stato finale a partire dallo stato attuale, sommando
+`CostoCammino` al risultato della funzione euristica, per poi asserire il
+valore ottenuto nel predicato dinamico `prossima_soglia(S)`. Il predicato poi
+fallisce per permettere di continuare la ricerca.
 
 Se invece il costo è ancora sotto il massimo, l'algoritmo procede normalmente
-con la ricerca limitata (nel costo) in profondità.
+con la ricerca limitata in profondità.
 
 ```prolog
 dfs_aux(
@@ -62,7 +62,8 @@ L'asserzione di `prossima_soglia` avviene tramite il predicato
 `assert_prossima_soglia(NuovaSoglia)`. Questo controlla se il valore di
 `NuovaSoglia` sia maggiore o uguale a un eventuale valore della soglia asserito
 in precedenza. Se sì, il predicato esegue un cut e non effettua altre
-operazioni, dato che ci interessa salvare solo il valore minimo tra quelli delle soglie trovate.
+operazioni, dato che ci interessa salvare solo il valore minimo tra quelli
+delle soglie trovate.
 
 Se invece non c'è una soglia salvata in precedenza, o se la `NuovaSoglia` è
 minore di questa, `assert_prossima_soglia` procede a effettuare la `retract`
@@ -93,7 +94,7 @@ ida_star_aux(Soluzione) :-
 ida_star_aux(Soluzione) :- ida_star_aux(Soluzione).
 ```
 
-Tramite `ida_star_aux`, si trova la soglia tramite `prossima_soglia(Soglia)`, si
+In `ida_star_aux`, si trova la soglia tramite `prossima_soglia(Soglia)`, si
 ritrae il predicato `prossima_soglia` e si procede a
 effettuare la ricerca con limite di costo `Soglia`.
 Se `cost_limit_search` non trova una soluzione, `ida_star_aux` si richiama
@@ -101,7 +102,7 @@ ricorsivamente, in modo che venga eseguita una nuova ricerca limitata nel
 costo con il nuovo valore di soglia trovato.
 
 L'algoritmo parte con il predicato `ida_star(Soluzione)`, che asserisce la
-soglia al valore dell'euristica sullo stato iniziale e fa partire
+soglia al valore dell'euristica sullo stato iniziale e valuta il predicato
 `ida_star_aux(Soluzione)`.
 
 ```prolog

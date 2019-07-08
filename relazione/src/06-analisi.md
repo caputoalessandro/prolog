@@ -36,7 +36,7 @@ stato iniziale    stato finale
 
 | Algorithms          | Inferences | Execution Time (s) |    Lips | First Solution length |
 | ------------------- | ---------: | -----------------: | ------: | --------------------: |
-| Iterative deepening |  3,331,110 |              0.367 | 9077721 |                    12 |
+| Iterative Deepening |  3,331,110 |              0.367 | 9077721 |                    12 |
 | A\*                 |  2,045,469 |              0,621 | 3292351 |                    12 |
 | IDA\*               |  2,862,494 |              0.325 | 8797702 |                    12 |
 
@@ -44,7 +44,7 @@ stato iniziale    stato finale
 
 | Algorithms          | Inferences | Execution Time (s) |    Lips | First Solution length |
 | ------------------- | ---------: | -----------------: | ------: | --------------------: |
-| Iterative deepening |  3,331,110 |              0.367 | 9077721 |                    12 |
+| Iterative Deepening |  3,331,110 |              0.367 | 9077721 |                    12 |
 | A\*                 |    174,894 |              0.037 | 4682229 |                    12 |
 | IDA\*               |  5,930,528 |              0.651 | 9112884 |                    12 |
 
@@ -67,7 +67,7 @@ b c d e f g h       e
 
 | Algorithms          |     Inferences | Execution Time (s) |    Lips | First Solution length |
 | ------------------- | -------------: | -----------------: | ------: | --------------------: |
-| Iterative deepening |  1,536,727,053 |            187.355 | 8202216 |                    10 |
+| Iterative Deepening |  1,536,727,053 |            187.355 | 8202216 |                    10 |
 | A\*                 |            N/A |                N/A |     N/A |                   N/A |
 | IDA\*               | 10,766,835,266 |           1195.656 | 9004961 |                    10 |
 
@@ -75,7 +75,7 @@ b c d e f g h       e
 
 | Algorithms          |     Inferences | Execution Time (s) |    Lips | First Solution length |
 | ------------------- | -------------: | -----------------: | ------: | --------------------: |
-| Iterative deepening |  1,536,727,053 |            187.355 | 8202216 |                    10 |
+| Iterative Deepening |  1,536,727,053 |            187.355 | 8202216 |                    10 |
 | A\*                 |     37,874,888 |             23.033 | 1644371 |                    10 |
 | IDA\*               | 10,947,466,831 |           1203.364 | 9097384 |                    10 |
 
@@ -96,7 +96,7 @@ c   f               a   d
 
 | Algorithms          |    Inferences | Execution Time (s) |     Lips | First Solution length |
 | ------------------- | ------------: | -----------------: | -------: | --------------------: |
-| Iterative deepening |   471,965,663 |             54.858 |  8603383 |                    16 |
+| Iterative Deepening |   471,965,663 |             54.858 |  8603383 |                    16 |
 | A\*                 |   669,712,233 |            563.830 |  1187792 |                    16 |
 | IDA\*               | 1,579,600,374 |            138.929 | 11369810 |                    16 |
 
@@ -104,7 +104,7 @@ c   f               a   d
 
 | Algorithms          |  Inferences | Execution Time (s) |    Lips | First Solution length |
 | ------------------- | ----------: | -----------------: | ------: | --------------------: |
-| Iterative deepening | 471,965,663 |             54.858 | 8603383 |                    16 |
+| Iterative Deepening | 471,965,663 |             54.858 | 8603383 |                    16 |
 | A\*                 |   5,587,396 |              2.168 | 2577590 |                    16 |
 | IDA\*               |  74,085,129 |              8.010 | 9249367 |                    16 |
 
@@ -114,7 +114,10 @@ c   f               a   d
 
 ![Confronto dei risultati per il terzo dominio](Istogrammi/a.png)
 
-##Confronto  euristiche  con costi variabili
+\newpage 
+
+## Confronto euristiche con costi variabili
+
 Abbiamo assegnato costo 3 alle azioni `stack` e `unstack` e costo 1 alle azioni `putdown` e `pickup`.
 
 : Dominio 3, risultati con prima euristica
@@ -133,7 +136,10 @@ Abbiamo assegnato costo 3 alle azioni `stack` e `unstack` e costo 1 alle azioni 
 
 ![Confronto dei risultati per costo variabile](Istogrammi/costi.png)
 
-## Osservazioni
+\newpage
+
+## Osservazioni sui risultati
+
 Gli istogrammi riportano le prestazioni degli algoritmi utilizzando le due euristiche.
 Il dominio di prova selezionato per la creazione degli istogrammi è il terzo perchè ha una complessità che si pone tra il primo e il secondo dominio.
 
@@ -145,17 +151,26 @@ Vediamo infatti una diminuzione significativa del numero di inferenze effettuate
 | A*   |           $\approx$ 9 minuti |        $\approx$   1.8 secondi |
 | IDA* |         $\approx$ 2,3 minuti |        $\approx$   7.8 secondi |
 
-Il tempo d'esecuzione dell'iterative deepening nel dominio tre è di $\approx$ 1 minuto, quindi si comporta meglio degli algoritmi a ricerca informata nel caso della prima euristica ma peggio nel caso della seconda euristica.
+Il tempo d'esecuzione dell'Iterative Deepening nel dominio tre è di $\approx$ 1 minuto, quindi si comporta meglio degli algoritmi a ricerca informata nel caso della prima euristica ma peggio nel caso della seconda euristica.
 
 Questo dimostra come la prima euristica sia decisamente poco efficace. Di fatto rende i due algoritmi basati su ricerca informata meno efficenti di un algoritmo di ricerca non informata.
 
 Per quanto riguarda il confronto degli algoritmi a ricerca informata per costi differenti, notiamo come questi causino un leggero miglioramento con l'utilizzo della prima euristica, ma un importante peggioramento con l'utilizzo della seconda euristica.
 
-Aumentando il costo di determinate azioni, gli algoritmi a ricerca informata funzionano leggermente meglio utilizzando la prima euristica, peggiorino decisamente utilizzando la seconda.
+Aumentando il costo di determinate azioni, gli algoritmi a ricerca informata
+funzionano leggermente meglio utilizzando la prima euristica, mentre peggiorano
+decisamente utilizzando la seconda.
 
-Un ultima osservazione va fatta riguardo le dimensioni e le complessità dei domini testati. Le relazioni ottenute tra gli algoritmi per il dominio 3, si mantengono per tutti i domini ad eccezione del dominio due, ovvero il più complesso.
+Un'ultima osservazione va fatta riguardo le dimensioni e le complessità dei
+domini testati. Le osservazioni fatte sugli algoritmi per il dominio 3 sono
+accettabili per tutti i domini ad eccezione del dominio due, ovvero il più
+complesso.
 
-In questo caso, per quanto riguarda la prima euristica, non siamo riusciti ad ottenere dati riguardo l'algoritmo `A*`. l'esecuzione infatti è terminata a  causa dell'esaurimento della memoria.
+In questo caso, per quanto riguarda la prima euristica, non siamo riusciti ad
+ottenere dati riguardo l'algoritmo A*. l'esecuzione infatti è terminata a
+causa dell'esaurimento della memoria.
 
-Per quanto riguarda l'utilizzo della seconda euristica invece, vediamo come `IDA*` abbia prestazioni stranamente peggiori tra tutti gli algoritmi, con un tempo di esecuzione di ben $\approx$ 20 minuti.
+Per quanto riguarda l'utilizzo della seconda euristica invece, vediamo come
+IDA* abbia prestazioni stranamente peggiori tra tutti gli algoritmi, con un
+tempo di esecuzione di ben $\approx$ 20 minuti.
 
