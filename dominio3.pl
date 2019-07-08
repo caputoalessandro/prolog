@@ -25,7 +25,13 @@ iniziale(S) :-
                     ],
                     S).
 
-costo(_, 1).
+%costo(stack(_,_),3).
+%costo(unstack(_,_),3).
+%costo(pickup(_),1).
+%costo(putdown(_),1).
+
+costo(_,1).
+
 
 goal(G) :-
     list_to_ord_set([ontable(a), ontable(d), on(b,c), on(c,a), on(e,f), on(f,d)], G).
